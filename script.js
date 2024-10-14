@@ -5,6 +5,7 @@ const BLOCK_SIZE = 30;
 const gameBoard = document.getElementById('game-board');
 const scoreElement = document.getElementById('score');
 const startButton = document.getElementById('start-button');
+const to2048Button = document.getElementById('to-2048');
 
 let board = [];
 let currentPiece;
@@ -37,6 +38,7 @@ function startGame() {
     createNewPiece();
     gameInterval = setInterval(gameLoop, gameSpeed);
     startButton.disabled = true;
+    to2048Button.style.display = 'none'; // 隐藏2048按钮
 }
 
 function resetGame() {
@@ -47,6 +49,8 @@ function resetGame() {
     }));
     score = 0;
     scoreElement.textContent = score;
+    startButton.disabled = false;
+    to2048Button.style.display = 'inline-block'; // 显示2048按钮
 }
 
 function createNewPiece() {
@@ -191,6 +195,7 @@ function gameOver() {
     clearInterval(gameInterval);
     alert('游戏结束!');
     startButton.disabled = false;
+    to2048Button.style.display = 'inline-block'; // 显示2048按钮
 }
 
 document.addEventListener('keydown', (e) => {
@@ -247,6 +252,7 @@ createBoard();
 startButton.addEventListener('click', startGame);
 
 // 在文件末尾添加以下代码
-document.getElementById('to-2048').addEventListener('click', () => {
+to2048Button.addEventListener('click', () => {
     window.location.href = '2048.html';
 });
+//1111111111111111111111111111111111

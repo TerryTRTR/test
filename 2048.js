@@ -16,6 +16,9 @@ let isMoving = false; // 是否正在移动中
 let gameStarted = false; // 游戏是否已开始
 let tileIdCounter = 0; // 用于生成唯一的方块ID
 
+// 在文件顶部添加新的常量
+const toTetrisButton = document.getElementById('to-tetris');
+
 // 初始化游戏
 function initGame() {
     // 创建一个4x4的空游戏板
@@ -28,6 +31,7 @@ function initGame() {
     updateBoard(); // 更新游戏板显示
     gameStarted = true; // 标记游戏已开始
     isMoving = false; // 确保移动标志被重置
+    toTetrisButton.style.display = 'inline-block'; // 显示俄罗斯方块按钮
 }
 
 // 在随机空位置添加一个新方块
@@ -91,6 +95,7 @@ function checkWin() {
         for (let j = 0; j < GRID_SIZE; j++) {
             if (board[i][j] !== 0 && board[i][j].value === 2048) {
                 alert('恭喜你赢了！');
+                toTetrisButton.style.display = 'inline-block'; // 显示俄罗斯方块按钮
                 return true;
             }
         }
@@ -190,6 +195,7 @@ function move(direction) {
                 setTimeout(() => {
                     alert('游戏结束！');
                     gameStarted = false;
+                    toTetrisButton.style.display = 'inline-block'; // 显示俄罗斯方块按钮
                 }, ANIMATION_DURATION);
             }
             isMoving = false;
@@ -268,10 +274,16 @@ document.addEventListener('keydown', event => {
 document.getElementById('new-game').addEventListener('click', () => {
     initGame();
     gameStarted = true;
+    toTetrisButton.style.display = 'none'; // 隐藏俄罗斯方块按钮
 });
 
 // 确保在页面加载时初始化游戏
 window.addEventListener('load', () => {
     initGame();
     gameStarted = true;
+});
+
+// 在文件末尾添加以下代码
+toTetrisButton.addEventListener('click', () => {
+    window.location.href = 'index.html';
 });
